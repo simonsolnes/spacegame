@@ -1,6 +1,5 @@
 from common import *
 from path import Path
-from roteffect import Roteffect
 
 class Ship():
     def __init__(self):
@@ -10,7 +9,6 @@ class Ship():
         self.angle = 0
 
         self.path = Path()
-        self.roteffect = Roteffect()
 
         self.points = [
             Vector(40, 0),
@@ -41,10 +39,8 @@ class Ship():
             rot = 10
         
         if keys[pg.K_r]:
-            self.roteffect.add(self.angle, atlas.ticks, 'l')
             self.rotate(- rot)
         if keys[pg.K_t]:
-            self.roteffect.add(self.angle, atlas.ticks, 'r')
             self.rotate(rot)
 
         self.vel -= self.vel / 30
@@ -67,7 +63,6 @@ class Ship():
         self.path.add(self.pos.copy())
         self.path.update(atlas)
 
-        self.roteffect.update(atlas)
 
     def draw(self, screen):
         self.path.draw(screen)
@@ -83,4 +78,3 @@ class Ship():
         pg.gfxdraw.filled_circle(screen.display, *circpos, 10, self.color)
         pg.gfxdraw.aacircle(screen.display, *circpos, 10, self.color)
 
-        self.roteffect.draw(screen, self.pos)
